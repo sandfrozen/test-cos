@@ -1,28 +1,45 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react'
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
+import Login from './components/Login'
+import First from './components/First'
+import {CurrentUserProvider, CurrentUserConsumer} from './context/CurrentUser.context.js'
+
+
+const PrivateRoute = ({component: Component, ...rest}) => (
+  <Route
+    {...rest}
+    render={props => (
+      <CurrentUserConsumer>
+        {({user}) =>
+          user ? (
+            <Component {...props} />
+          ) : (
+            <Redirect
+              to={{
+                pathname: '/login',
+                state: {from: props.location}
+              }}
+            />
+          )
+        }
+      </CurrentUserConsumer>
+    )}
+  />
+)
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+      <BrowserRouter>
+          <CurrentUserProvider>
+            <Switch>
+              <Route exact path='/login' component={Login}/>
+              <PrivateRoute path='/' component={First}/>
+            </Switch>
+          </CurrentUserProvider>
+      </BrowserRouter>
+    )
   }
 }
 
-export default App;
+export default App
