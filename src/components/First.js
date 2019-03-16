@@ -8,18 +8,22 @@ const fetch = createApolloFetch({
 })
 
 class First extends Component {
+  state = {
+    usersCount: 0
+  }
   componentDidMount() {
     fetch({
       query: '{ users { id, name }}'
     }).then(res => {
       console.log(res)
+      this.setState({ usersCount: res.data.users.length})
     })
   }
   
   render() {
     return (
       <div>
-        First
+        U count {this.state.usersCount}
         
         <CurrentUserConsumer>
           {({logout}) => (

@@ -34,7 +34,7 @@ class App extends Component {
           <CurrentUserProvider>
             <Switch>
               <Route exact path='/login' component={Login}/>
-              <PrivateRoute component={First}/>
+              <PrivateRoute path='/' component={First}/>
             </Switch>
           </CurrentUserProvider>
       </BrowserRouter>

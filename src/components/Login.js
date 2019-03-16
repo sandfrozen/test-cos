@@ -14,7 +14,7 @@ class Login extends Component {
             {!processing &&
             <div>
               
-              <button onClick={login}>Zaloguj .</button>
+              <button onClick={login}>Zaloguj1.</button>
             </div>
             }
           </div>
