@@ -4,7 +4,7 @@ import {CurrentUserConsumer} from '../context/CurrentUser.context'
 const {createApolloFetch} = require('apollo-fetch')
 
 const fetch = createApolloFetch({
-  uri: 'http://212.33.68.7:4000/graphql'
+  uri: '/graphql'
 })
 
 class First extends Component {
