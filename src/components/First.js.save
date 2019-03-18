@@ -9,7 +9,7 @@ const fetch = createApolloFetch({
 
 class First extends Component {
   state = {
-    users: []
+    usersCount: 0
   }
   componentDidMount() {
     fetch({
@@ -17,16 +17,16 @@ class First extends Component {
     }).then(res => {
       console.log(res)
       this.setState({ users: res.data.users })
-    }).catch(e => {
+      
+    }).error(e => {
 	console.log(e)
-	this.setState({users: []})
     })
   }
   
   render() {
     return (
       <div>
-        U count {this.state.users.length}
+        U count {this.state.usersCount}
         
         <CurrentUserConsumer>
           {({logout}) => (
